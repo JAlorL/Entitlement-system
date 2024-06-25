@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import {
+  findRequest,
   findRequestById,
   getPendingRequests,
   makeRequest,
@@ -25,6 +26,12 @@ export const requestAccess = async (req: Request, res: Response) => {
       );
     }
     console.log("dataPair recieved", dataPair);
+    const existingRequest = await findRequest(id, datasetId, freqId);
+    if (existingRequest.length !== 0) {
+      throw new Error(
+        "You have already made a request for this dataset and frequency"
+      );
+    }
 
     const data = await makeRequest(id, datasetId, freqId);
 
