@@ -8,6 +8,7 @@ const populateUsers = async () => {
     { name: "User Quant", role: "quant" },
     { name: "User Ops", role: "ops" },
   ]);
+  console.log('Users created!')
 };
 
 const populateDatasets = async () => {
@@ -31,6 +32,7 @@ const populateDatasets = async () => {
 
     { include: ["frequencies_dataset"] }
   );
+  console.log('Datasets created and linked to their frequencies!')
 };
 
 const populateFrequencies = async () => {
@@ -39,6 +41,7 @@ const populateFrequencies = async () => {
     { frequency: "daily" },
     { frequency: "monthly" },
   ]);
+  console.log('Frequencies created!')
 };
 
 populateUsers();
