@@ -14,7 +14,7 @@ const populateDatasets = async () => {
   await Dataset.bulkCreate(
     [
       {
-        name: "Bitcoin",
+        name: "bitcoin",
         symbol: "BTC",
         frequencies_dataset: [
           { frequency_id: "1" },
@@ -23,7 +23,7 @@ const populateDatasets = async () => {
         ],
       },
       {
-        name: "Ethereum",
+        name: "ethereum",
         symbol: "ETH",
         frequencies_dataset: [{ frequency_id: "2" }],
       },

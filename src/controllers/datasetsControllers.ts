@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import { getDatasetsWithFrequencies } from "../repositories/datasetsRepositories";
 import { findRequest } from "../repositories/requestsAccessRepositories";
+import { getPricingData } from "../helpers/fetchExternalApi";
+import Dataset from "../database/models/Dataset";
+import Frequency from "../database/models/Frequency";
+import { formatFrequency } from "../helpers/formatFrequency";
 
 export const viewAllMetadata = async (req: Request, res: Response) => {
   try {
@@ -14,27 +18,25 @@ export const viewAllMetadata = async (req: Request, res: Response) => {
 
 export const viewDataPricing = async (req: Request, res: Response) => {
   try {
-    const { id, role } = res.locals.auth;
     const { datasetId, freqId } = req.body;
+    const [{ name: datasetName }] = await Dataset.findAll({
+      where: { id: datasetId },
+      attributes: ["name"],
+      raw: true,
+    });
 
-    if (role !== "quant") {
-      throw new Error("You need a quant role to access this data");
-    }
-    if (!datasetId || !freqId) {
-      throw new Error("You must select a dataset and a frequency");
-    }
-    const requestAccessInfo = await findRequest(id, datasetId, freqId);
-    if (!requestAccessInfo || requestAccessInfo.length === 0) {
-      throw new Error(
-        "There is not request available with the dataset and frequency selected"
-      );
-    }
-    console.log("findrequest inf:", requestAccessInfo[0].status);
+    const [{ frequency }] = await Frequency.findAll({
+      where: { id: freqId },
+      attributes: ["frequency"],
+      raw: true,
+    });
+
+    const formattedFrequency = formatFrequency(frequency);
+    const pricingData = await getPricingData(datasetName, formattedFrequency);
 
     res.status(201).send({
       status: "ok",
-
-      data: { status: requestAccessInfo[0].status },
+      data: pricingData,
     });
   } catch (error) {
     let errorMessage = "Internal Server Error";

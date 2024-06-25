@@ -12,6 +12,7 @@ import {
   requestAccess,
   viewPendingRequests,
 } from "./controllers/requestsAccessControllers";
+import { validateViewAccess } from "./middlewares/accessValidationMiddleware";
 
 dotenv.config();
 
@@ -35,7 +36,7 @@ app.get("/requests/pending", authenticateUser, viewPendingRequests);
 app.patch("/requests/:requestAccessId", authenticateUser, approveRejectRequest);
 
 //View Pricing
-app.get("/datasets", authenticateUser, viewDataPricing);
+app.get("/datasets", authenticateUser, validateViewAccess, viewDataPricing);
 
 app.listen(SERVER_PORT, () =>
   console.log(`Server listening at ${SERVER_HOST}: ${SERVER_PORT}`)
