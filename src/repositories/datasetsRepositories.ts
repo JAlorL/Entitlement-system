@@ -17,6 +17,7 @@ const getDatasetsWithFrequencies = async () => {
     name: dataset.name,
     symbol: dataset.symbol,
     frequencies_dataset: dataset.frequencies_dataset.map((freq) => ({
+      frequencyId: freq.frequency_id,
       frequency: freq.frequency.frequency,
     })),
   }));

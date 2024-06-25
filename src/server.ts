@@ -1,12 +1,13 @@
 import express, { Request, Response } from "express";
 import * as dotenv from "dotenv";
 import morgan from "morgan";
-import { getAllMetadata } from "./controllers/datasetsControllers";
+import { viewAllMetadata } from "./controllers/datasetsControllers";
 import { authenticateUser } from "./middlewares/authenticationMiddleware";
 import "./database/connection";
-import TestUser from "./database/models/User";
-// import TestRequest from "./database/TestRequest";
-import TestDataset from "./database/models/Dataset";
+import {
+  requestAccess,
+  viewPendingRequests,
+} from "./controllers/requestsAccessControllers";
 
 dotenv.config();
 
@@ -18,16 +19,13 @@ app.use(express.json());
 
 //ENDPOINTS
 //View metadata
-app.get("/metadata", getAllMetadata);
+app.get("/metadata", viewAllMetadata);
 
 //Request access (Quant)
-app.post("/requests", async (req, res) => {
-  const request = await TestUser.create(req.body);
-  return res.status(201).json({ request, message: "created" });
-});
+app.post("/requests", authenticateUser, requestAccess);
 
 //Viewing pending requests (Ops)
-app.get("requests/pending");
+app.get("/requests/pending", authenticateUser, viewPendingRequests);
 
 //Aprove or reject request (Ops)
 app.post("requests/:request_id");

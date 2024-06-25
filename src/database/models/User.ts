@@ -1,15 +1,5 @@
-import {
-  Table,
-  Column,
-  Model,
-  DataType,
-  CreatedAt,
-  UpdatedAt,
-  BeforeCreate,
-  HasMany,
-  PrimaryKey,
-} from "sequelize-typescript";
-// import TestRequest from "./TestRequest";
+import { Table, Column, Model, DataType, HasMany } from "sequelize-typescript";
+import RequestAccess from "./RequestAccess";
 
 @Table({
   timestamps: true,
@@ -34,8 +24,8 @@ class User extends Model {
   })
   declare role: string;
 
-  // @HasMany(() => TestRequest)
-  // declare testRequests: TestRequest[];
+  @HasMany(() => RequestAccess)
+  declare testRequests: RequestAccess[];
 }
 
 export default User;

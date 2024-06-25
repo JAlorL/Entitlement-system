@@ -2,12 +2,6 @@ import {
   Table,
   Column,
   Model,
-  DataType,
-  CreatedAt,
-  UpdatedAt,
-  BeforeCreate,
-  BelongsToMany,
-  HasMany,
   PrimaryKey,
   BelongsTo,
   ForeignKey,
@@ -34,8 +28,9 @@ class DatasetFrequency extends Model {
   declare frequency: Frequency;
 
   @ForeignKey(() => Frequency)
-  @PrimaryKey
-  @Column
+  @Column({
+    primaryKey: true,
+  })
   declare frequency_id: number;
 }
 

@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { getEnvVar } from "../helpers/getEnvVar";
 
 dotenv.config();
 
-const JWT_SECRET = process.env.JWT_SECRET || "shshshsh";
+const JWT_SECRET = getEnvVar("JWT_SECRET");
 
 export const authenticateUser = async (
   req: Request,
@@ -24,10 +25,9 @@ export const authenticateUser = async (
       throw new Error("Invalid token format");
     }
     const tokenInfo = jwt.verify(token, JWT_SECRET);
-    console.log(tokenInfo);
+    console.log("token info: ", tokenInfo);
 
     res.locals.auth = tokenInfo;
-    console.log(res.locals);
 
     next();
   } catch (error) {
