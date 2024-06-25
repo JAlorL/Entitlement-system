@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { getDatasetsWithFrequencies } from "../repositories/datasetsRepositories";
-import { findRequest } from "../repositories/requestsAccessRepositories";
 import { getPricingData } from "../helpers/fetchExternalApi";
 import Dataset from "../database/models/Dataset";
 import Frequency from "../database/models/Frequency";
