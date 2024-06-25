@@ -1,7 +1,10 @@
 import express, { Request, Response } from "express";
 import * as dotenv from "dotenv";
 import morgan from "morgan";
-import { viewAllMetadata } from "./controllers/datasetsControllers";
+import {
+  viewAllMetadata,
+  viewDataPricing,
+} from "./controllers/datasetsControllers";
 import { authenticateUser } from "./middlewares/authenticationMiddleware";
 import "./database/connection";
 import {
@@ -29,14 +32,10 @@ app.post("/requests", authenticateUser, requestAccess);
 app.get("/requests/pending", authenticateUser, viewPendingRequests);
 
 //Aprove or reject request (Ops)
-app.patch("/requests/:requestAccessId", authenticateUser, approveRejectRequest );
+app.patch("/requests/:requestAccessId", authenticateUser, approveRejectRequest);
 
 //View Pricing
-app.get("/datasets/:dataset_id");
-
-app.get("/hello", (req: Request, res: Response) => {
-  res.send("Hello response!");
-});
+app.get("/datasets", authenticateUser, viewDataPricing);
 
 app.listen(SERVER_PORT, () =>
   console.log(`Server listening at ${SERVER_HOST}: ${SERVER_PORT}`)

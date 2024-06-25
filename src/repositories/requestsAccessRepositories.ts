@@ -41,3 +41,16 @@ export const updateRequestStatus = async (id: string, status: boolean) => {
   );
   return rowsAffected;
 };
+
+export const findRequest = async (
+  userId: string,
+  datasetId: string,
+  freqId: string
+) => {
+  const requestsRowInfo = await RequestAccess.findAll({
+    where: { user_id: userId, dataset_id: datasetId, frequency_id: freqId },
+    raw: true,
+  });
+  console.log("reqInfo (BY USERID) from db:  ", requestsRowInfo);
+  return requestsRowInfo;
+};
