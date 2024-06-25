@@ -5,6 +5,7 @@ import { viewAllMetadata } from "./controllers/datasetsControllers";
 import { authenticateUser } from "./middlewares/authenticationMiddleware";
 import "./database/connection";
 import {
+  approveRejectRequest,
   requestAccess,
   viewPendingRequests,
 } from "./controllers/requestsAccessControllers";
@@ -28,10 +29,10 @@ app.post("/requests", authenticateUser, requestAccess);
 app.get("/requests/pending", authenticateUser, viewPendingRequests);
 
 //Aprove or reject request (Ops)
-app.post("requests/:request_id");
+app.patch("/requests/:requestAccessId", authenticateUser, approveRejectRequest );
 
 //View Pricing
-app.get("datasets/:dataset_id");
+app.get("/datasets/:dataset_id");
 
 app.get("/hello", (req: Request, res: Response) => {
   res.send("Hello response!");

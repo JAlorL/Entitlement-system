@@ -20,3 +20,24 @@ export const getPendingRequests = async () => {
   });
   return pendingRequests;
 };
+
+export const findRequestById = async (id: string) => {
+  const requestsRowInfo = await RequestAccess.findAll({
+    where: { id: id },
+    raw: true,
+  });
+  console.log("reqInfo from db:  ", requestsRowInfo);
+  return requestsRowInfo;
+};
+
+export const updateRequestStatus = async (id: string, status: boolean) => {
+  const rowsAffected = await RequestAccess.update(
+    { status: status },
+    {
+      where: {
+        id: id,
+      },
+    }
+  );
+  return rowsAffected;
+};

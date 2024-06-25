@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import getDatasetsWithFrequencies from "../repositories/datasetsRepositories";
+import { getDatasetsWithFrequencies } from "../repositories/datasetsRepositories";
 
 export const viewAllMetadata = async (req: Request, res: Response) => {
   try {

@@ -2,7 +2,7 @@ import Dataset from "../database/models/Dataset";
 import DatasetFrequency from "../database/models/DatasetFrequency";
 import Frequency from "../database/models/Frequency";
 
-const getDatasetsWithFrequencies = async () => {
+export const getDatasetsWithFrequencies = async () => {
   const datasets = await Dataset.findAll({
     include: [
       {
@@ -25,4 +25,10 @@ const getDatasetsWithFrequencies = async () => {
   return formattedData;
 };
 
-export default getDatasetsWithFrequencies;
+export const getDataPairById = async (datasetId: string, freqId: string) => {
+  const resPair = await DatasetFrequency.findAll({
+    where: { dataset_id: datasetId, frequency_id: freqId },
+  });
+  console.log(resPair);
+  return resPair;
+};
