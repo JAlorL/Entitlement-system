@@ -1,5 +1,6 @@
 import request from "supertest";
-import app, { server } from "../server";
+import { server } from "../server";
+import app from "../app";
 import * as datasetsRepositories from "../repositories/datasetsRepositories";
 import * as requestsAccessRepositories from "../repositories/requestsAccessRepositories";
 import jwt from "jsonwebtoken";
@@ -59,11 +60,10 @@ describe("By calling the endpoint: POST /requests, a Quant user can request acce
     );
   });
 
-  afterAll((done) => {
-    server.close(() => {
+  afterAll(async () => {
+    await server.close(() => {
       jest.clearAllMocks();
       jest.resetAllMocks();
-      done();
     });
   });
 });

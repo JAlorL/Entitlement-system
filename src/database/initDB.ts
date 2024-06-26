@@ -6,6 +6,6 @@ const syncDB = async () => {
 };
 
 syncDB().catch((error) => {
-  console.error("Failed to synchronize database tables:", error);
+  console.error("Failed to synchronise database tables:", error);
   process.exit(1);
 });

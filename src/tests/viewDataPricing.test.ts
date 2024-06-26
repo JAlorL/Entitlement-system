@@ -1,5 +1,6 @@
 import request from "supertest";
-import app, { server } from "../server";
+import { server } from "../server";
+import app from "../app";
 import * as requestsAccessRepositories from "../repositories/requestsAccessRepositories";
 import * as fetchExternalApi from "../helpers/fetchExternalApi";
 import jwt from "jsonwebtoken";
@@ -68,11 +69,10 @@ describe("By calling GET /datasets, a quant with granted access is able to view 
     );
   });
 
-  afterAll((done) => {
-    server.close(() => {
+  afterAll(async () => {
+    await server.close(() => {
       jest.clearAllMocks();
       jest.resetAllMocks();
-      done();
     });
   });
 });

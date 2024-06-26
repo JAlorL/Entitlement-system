@@ -1,5 +1,6 @@
 import request from "supertest";
-import app, { server } from "../server";
+import { server } from "../server";
+import app from "../app";
 import * as requestsAccessRepositories from "../repositories/requestsAccessRepositories";
 import jwt from "jsonwebtoken";
 
@@ -66,11 +67,10 @@ describe("By calling PATCH /requests/:requestAccessId, an Ops user can approve o
     );
   });
 
-  afterAll((done) => {
-    server.close(() => {
+  afterAll(async () => {
+    await server.close(() => {
       jest.clearAllMocks();
       jest.resetAllMocks();
-      done();
     });
   });
 });

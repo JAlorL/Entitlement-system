@@ -1,5 +1,6 @@
 import request from "supertest";
-import app, { server } from "../server";
+import { server } from "../server";
+import app from "../app";
 import * as datasetsRepositories from "../repositories/datasetsRepositories";
 
 jest.mock("../repositories/datasetsRepositories", () => ({
@@ -7,7 +8,7 @@ jest.mock("../repositories/datasetsRepositories", () => ({
 }));
 
 describe("By calling endpoint: GET /metadata , any user can view the metadata and its frequencies", () => {
-  beforeAll(() => {
+  beforeAll(async () => {
     const mockData = [
       {
         id: "1",
@@ -55,11 +56,10 @@ describe("By calling endpoint: GET /metadata , any user can view the metadata an
     );
   });
 
-  afterAll((done) => {
-    server.close(() => {
+  afterAll(async () => {
+    await server.close(() => {
       jest.clearAllMocks();
       jest.resetAllMocks();
-      done();
     });
   });
 });

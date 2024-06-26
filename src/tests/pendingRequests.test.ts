@@ -1,5 +1,6 @@
 import request from "supertest";
-import app, { server } from "../server";
+import { server } from "../server";
+import app from "../app";
 import * as requestsAccessRepositories from "../repositories/requestsAccessRepositories";
 import jwt from "jsonwebtoken";
 
@@ -59,11 +60,10 @@ describe("By calling endpoint: GET /requests/pending, an Ops user should view th
     );
   });
 
-  afterAll((done) => {
-    server.close(() => {
+  afterAll(async () => {
+    await server.close(() => {
       jest.clearAllMocks();
       jest.resetAllMocks();
-      done();
     });
   });
 });
