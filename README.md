@@ -88,8 +88,8 @@ Quant users can request access to view pricing of a dataset with an available fr
 
 #### Request example: 
 
-Content-Type: application/json
-Authorization: Bearer <token>
+`Content-Type: application/json
+Authorization: Bearer <token>`
 
 `{
   "datasetId": "1",
@@ -116,8 +116,8 @@ Ops users can view all pending dataset access requests.
 
 #### Request: 
 
-Content-Type: application/json
-Authorization: Bearer <token>
+`Content-Type: application/json
+Authorization: Bearer <token>`
 
 #### Response example:
 
@@ -147,8 +147,8 @@ Ops users can approve or reject a quant request.
 
 #### Request example:
 
-Content-Type: application/json
-Authorization: Bearer <token>
+`Content-Type: application/json
+Authorization: Bearer <token>`
 
 `{
   "access": "approve"
@@ -166,8 +166,8 @@ Authorization: Bearer <token>
 Quant users with granted access can view the datasets including pricing for the requested frequency.
 
 #### Request example:
-Content-Type: application/json
-Authorization: Bearer <token>
+`Content-Type: application/json
+Authorization: Bearer <token>`
 
 `{
   "datasetId": "1",
