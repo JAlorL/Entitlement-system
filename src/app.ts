@@ -13,6 +13,7 @@ import {
   viewPendingRequests,
 } from "./controllers/requestsAccessControllers";
 import { validateViewAccess } from "./middlewares/accessValidationMiddleware";
+import { errorHandler } from "./helpers/errorHandler";
 
 // dotenv.config();
 
@@ -37,6 +38,8 @@ app.patch("/requests/:requestAccessId", authenticateUser, approveRejectRequest);
 
 //View Pricing (only for Quants with granted access)
 app.get("/datasets", authenticateUser, validateViewAccess, viewDataPricing);
+
+app.use(errorHandler);
 
 // const server = app.listen(SERVER_PORT, () =>
 //   console.log(`Server listening at ${SERVER_HOST}: ${SERVER_PORT}`)

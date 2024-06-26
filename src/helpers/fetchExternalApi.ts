@@ -1,4 +1,5 @@
 import axios from "axios";
+import CustomError from "../types/customError";
 
 const BASE_URL = "https://api.coincap.io/v2/assets";
 
@@ -16,10 +17,9 @@ export const getPricingData = async (
     }));
     return pricingData;
   } catch (error) {
-    console.error(
+    throw new CustomError(
       `Error fetching pricing data for ${datasetName} at ${frequency}:`,
-      error
+      400
     );
-    throw new Error("Could not fetch pricing data");
   }
 };

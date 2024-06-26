@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { getEnvVar } from "../helpers/getEnvVar";
+import CustomError from "../types/customError";
 
 dotenv.config();
 
@@ -16,13 +17,13 @@ export const authenticateUser = async (
     const { authorization } = req.headers;
 
     if (!authorization) {
-      throw new Error("Authorization headers missing");
+      throw new CustomError("Authorization headers missing", 400);
     }
 
     const [tokenType, token] = authorization.split(" ");
 
     if (tokenType !== "Bearer" || !token) {
-      throw new Error("Invalid token format");
+      throw new CustomError("Invalid token format", 400);
     }
     const tokenInfo = jwt.verify(token, JWT_SECRET);
     console.log("token info: ", tokenInfo);
@@ -31,6 +32,6 @@ export const authenticateUser = async (
 
     next();
   } catch (error) {
-    return console.log(error);
+    next(error);
   }
 };
