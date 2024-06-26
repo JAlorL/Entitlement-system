@@ -32,7 +32,6 @@ export const requestAccess = async (req: Request, res: Response) => {
         "You have already made a request for this dataset and frequency"
       );
     }
-
     const data = await makeRequest(id, datasetId, freqId);
 
     res.status(201).send({

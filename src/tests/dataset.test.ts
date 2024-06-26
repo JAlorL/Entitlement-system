@@ -56,6 +56,10 @@ describe("By calling endpoint: GET /metadata , any user can view the metadata an
   });
 
   afterAll((done) => {
-    server.close(done);
+    server.close(() => {
+      jest.clearAllMocks();
+      jest.resetAllMocks();
+      done();
+    });
   });
 });
