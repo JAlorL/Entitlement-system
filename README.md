@@ -1,6 +1,6 @@
 # Backend Entitlement System
 
-This is a backend system for managing dataset entitlements. The system allows Quantitative Traders to request access to datasets, which can be approved or rejected by Operations team members. The system is built with Node.js, TypeScript, and PostgreSQL, and can be run locally or using Docker.
+This is a backend system for managing dataset entitlements. The system allows Quantitative Traders to request access to datasets, which can be approved or rejected by Operations team members. The system is built with Node, TypeScript, Sequelize and PostgreSQL, and can be run locally or using Docker.
 
 ## Table of Contents
 
@@ -16,6 +16,11 @@ This is a backend system for managing dataset entitlements. The system allows Qu
 - [Running Tests](#running-tests)
 
 ## Project Setup
+
+`/docs` folder contains:
+- System design of the different services, their relationships and potential deployment on AWS (open with draw.io)
+- Database modelling (open with draw.io)
+- Postman requests ready to test the application
 
 ### Prerequisites
 

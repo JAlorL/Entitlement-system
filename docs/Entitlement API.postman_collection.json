@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "7dbebf6e-0d66-4122-a96c-32da88750931",
+		"name": "Entitlement API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36529265"
+	},
+	"item": [
+		{
+			"name": "Public View Metadata",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/metadata",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"metadata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Quant Requests Access to a  Dataset and Frequency",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiVXNlciBRdWFudCIsInJvbGUiOiJxdWFudCJ9._eFnwaGZWLZAcoi_ytMzNB3ZZdIOxgbWcnIVA7LMxrQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"datasetId\": \"2\",\r\n    \"freqId\":\"2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/requests",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"requests"
+					],
+					"query": [
+						{
+							"key": "datasetId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "freqId",
+							"value": "2",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ops Reviews Pending Requests",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiVXNlciBPcHMiLCJyb2xlIjoib3BzIn0.D3IGhP_5466Eal8CO4lanB3Q76K0zEbpebL60EvoKdM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/requests/pending",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"requests",
+						"pending"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ops Approves or Rejects a Request",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiVXNlciBPcHMiLCJyb2xlIjoib3BzIn0.D3IGhP_5466Eal8CO4lanB3Q76K0zEbpebL60EvoKdM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"access\": \"approve\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/requests/4",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"requests",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Quant Accesses View Pricing for a given dataset and frequency",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiVXNlciBRdWFudCIsInJvbGUiOiJxdWFudCJ9._eFnwaGZWLZAcoi_ytMzNB3ZZdIOxgbWcnIVA7LMxrQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"datasetId\":2, \"freqId\": 1}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/datasets",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"datasets"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
