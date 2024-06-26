@@ -39,7 +39,7 @@ Create a `docker-compose.yml` file in the root directory. Please refer to `.dock
 
 ### Initialise the Database
 
-Runn the following commands to initialise and populate the database: 
+Runn the following commands to initialise and populate the database:
 
 `npm run initDB`
 `npm run populateDB`
@@ -56,9 +56,11 @@ Runn the following commands to initialise and populate the database:
 ### API Endpoints
 
 ## GET /metadata
+
 Retrieve metadata for all datasets
 
-#### Response example: 
+#### Response example:
+
 `{
   "status": "ok",
   "data": [
@@ -83,10 +85,12 @@ Retrieve metadata for all datasets
   ]
 }
 `
-## POST /requests
-Quant users can request access to view pricing of a dataset with an available frequency. 
 
-#### Request example: 
+## POST /requests
+
+Quant users can request access to view pricing of a dataset with an available frequency.
+
+#### Request example:
 
 `Content-Type: application/json
 Authorization: Bearer <token>`
@@ -96,7 +100,7 @@ Authorization: Bearer <token>`
   "freqId": "1"
 }`
 
-#### Response example: 
+#### Response example:
 
 `{
   "status": "ok",
@@ -112,9 +116,10 @@ Authorization: Bearer <token>`
 `
 
 ## GET /requests/pending
+
 Ops users can view all pending dataset access requests.
 
-#### Request: 
+#### Request:
 
 `Content-Type: application/json
 Authorization: Bearer <token>`
@@ -142,7 +147,8 @@ Authorization: Bearer <token>`
 }
 `
 
-## PATCH /requests/:requestAccessId 
+## PATCH /requests/:requestAccessId
+
 Ops users can approve or reject a quant request.
 
 #### Request example:
@@ -154,7 +160,7 @@ Authorization: Bearer <token>`
   "access": "approve"
 }`
 
-#### Response example: 
+#### Response example:
 
 `{
   "status": "ok",
@@ -163,9 +169,11 @@ Authorization: Bearer <token>`
 `
 
 ## GET /datasets
+
 Quant users with granted access can view the datasets including pricing for the requested frequency.
 
 #### Request example:
+
 `Content-Type: application/json
 Authorization: Bearer <token>`
 
@@ -194,10 +202,7 @@ Authorization: Bearer <token>`
 `
 
 ## Running Tests
+
 `npm run test`
 
-
-
-
-
-
+If there is an issue with the server (EADDRINUSE :::3000), please run the tests individually. You can do that by installing Jest Runner in VSCode or with command, example: `npx jest src/tests/metadata.test.ts`
