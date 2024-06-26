@@ -4,4 +4,8 @@ const syncDB = async () => {
   await sequelize.sync({ force: true });
   console.log("Database tables synchronised!");
 };
-syncDB();
+
+syncDB().catch((error) => {
+  console.error("Failed to synchronize database tables:", error);
+  process.exit(1);
+});
