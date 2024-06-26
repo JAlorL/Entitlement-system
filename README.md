@@ -55,6 +55,8 @@ Runn the following commands to initialise and populate the database:
 
 ## Running the Project with Docker
 
+⚠️Please, remember to remove the `/docs` folder from the repository, as Docker will struggle recognising these files
+
 `docker-compose build`
 `docker-compose up`
 
