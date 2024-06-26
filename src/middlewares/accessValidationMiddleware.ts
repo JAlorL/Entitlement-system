@@ -31,7 +31,6 @@ export const validateViewAccess = async (
         403
       );
     }
-    console.log("findrequest inf:", requestAccessInfo[0].status);
 
     next();
   } catch (error) {

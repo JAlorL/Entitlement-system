@@ -26,7 +26,7 @@ export const findRequestById = async (id: string) => {
     where: { id: id },
     raw: true,
   });
-  console.log("reqInfo from db:  ", requestsRowInfo);
+
   return requestsRowInfo;
 };
 
@@ -51,6 +51,6 @@ export const findRequest = async (
     where: { user_id: userId, dataset_id: datasetId, frequency_id: freqId },
     raw: true,
   });
-  console.log("reqInfo (BY USERID) from db:  ", requestsRowInfo);
+
   return requestsRowInfo;
 };

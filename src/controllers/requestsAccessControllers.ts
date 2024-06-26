@@ -31,7 +31,7 @@ export const requestAccess = async (
         400
       );
     }
-    console.log("dataPair recieved", dataPair);
+   
     const existingRequest = await findRequest(id, datasetId, freqId);
     if (existingRequest.length !== 0) {
       throw new CustomError(
