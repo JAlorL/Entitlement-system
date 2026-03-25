@@ -14,9 +14,15 @@ export const validateViewAccess = async (
     if (role !== "quant") {
       throw new CustomError("You need a quant role to access this data", 403);
     }
-    if (!datasetId || !freqId) {
+
+    if (datasetId === undefined && datasetId === null && datasetId === "") {
       throw new CustomError("You must select a dataset and a frequency", 400);
     }
+
+    if (freqId === undefined && freqId === null && freqId === "") {
+      throw new CustomError("You must select a dataset and a frequency", 400);
+    }
+
     const requestAccessInfo = await findRequest(id, datasetId, freqId);
     if (!requestAccessInfo || requestAccessInfo.length === 0) {
       throw new CustomError(
