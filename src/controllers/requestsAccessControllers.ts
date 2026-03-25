@@ -84,6 +84,7 @@ export const approveRejectRequest = async (
     const { role } = res.locals.auth;
     const { requestAccessId } = req.params;
     const { access } = req.body;
+    const temporaryAuditMessage = "review-request-access";
 
     if (role !== "ops") {
       throw new CustomError(
