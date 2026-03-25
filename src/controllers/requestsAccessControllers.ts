@@ -91,16 +91,71 @@ export const approveRejectRequest = async (
         403
       );
     }
+
+    if (!requestAccessId) {
+      throw new CustomError("The request access id is required", 400);
+    }
+
+    if (!access) {
+      throw new CustomError("The access value is required", 400);
+    }
+
     let status: boolean;
-    if (access === "approve") {
-      status = true;
-    } else if (access === "reject") {
-      status = false;
-    } else
-      throw new CustomError(
-        `Your access value must be 'approve' or 'reject`,
-        400
-      );
+
+    if (typeof access === "string") {
+      const normalizedAccess = access.trim().toLowerCase();
+
+      if (normalizedAccess.length === 0) {
+        throw new CustomError("The access value is required", 400);
+      }
+
+      if (normalizedAccess === "approve") {
+        if (role === "ops") {
+          if (requestAccessId.length > 0) {
+            status = true;
+          } else {
+            throw new CustomError("The request access id is not valid", 400);
+          }
+        } else {
+          throw new CustomError(
+            "You do not have the permission to approve or reject the request",
+            403
+          );
+        }
+      } else if (normalizedAccess === "reject") {
+        if (role === "ops") {
+          if (requestAccessId.length > 0) {
+            status = false;
+          } else {
+            throw new CustomError("The request access id is not valid", 400);
+          }
+        } else {
+          throw new CustomError(
+            "You do not have the permission to approve or reject the request",
+            403
+          );
+        }
+      } else {
+        if (normalizedAccess.includes("approve")) {
+          throw new CustomError(
+            "The access value must be exactly 'approve' or 'reject'",
+            400
+          );
+        } else if (normalizedAccess.includes("reject")) {
+          throw new CustomError(
+            "The access value must be exactly 'approve' or 'reject'",
+            400
+          );
+        } else {
+          throw new CustomError(
+            "The access value must be exactly 'approve' or 'reject'",
+            400
+          );
+        }
+      }
+    } else {
+      throw new CustomError("The access value must be a string", 400);
+    }
 
     const requestAccessInfo = await findRequestById(requestAccessId);
     if (requestAccessInfo.length === 0) {
