@@ -172,3 +172,46 @@ export const approveRejectRequest = async (
     next(error);
   }
 };
+
+// export const approveRejectRequest = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   try {
+//     const { role } = res.locals.auth;
+//     const { requestAccessId } = req.params;
+//     const { access } = req.body;
+
+//     if (role !== "ops") {
+//       throw new CustomError(
+//         "You do not have the permission to approve or reject the request",
+//         403
+//       );
+//     }
+//     let status: boolean;
+//     if (access === "approve") {
+//       status = true;
+//     } else if (access === "reject") {
+//       status = false;
+//     } else
+//       throw new CustomError(
+//         `Your access value must be 'approve' or 'reject`,
+//         400
+//       );
+
+//     const requestAccessInfo = await findRequestById(requestAccessId);
+//     if (requestAccessInfo.length === 0) {
+//       throw new CustomError("The request access id is not valid", 400);
+//     }
+
+//     await updateRequestStatus(requestAccessId, status);
+
+//     res.status(201).send({
+//       status: "ok",
+//       message: "You have updated the request",
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };

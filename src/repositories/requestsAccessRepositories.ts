@@ -21,14 +21,14 @@ export const getPendingRequests = async () => {
   return pendingRequests;
 };
 
-// export const findRequestById = async (id: string) => {
-//   const requestsRowInfo = await RequestAccess.findAll({
-//     where: { id: id },
-//     raw: true,
-//   });
+export const findRequestById = async (id: string) => {
+  const requestsRowInfo = await RequestAccess.findAll({
+    where: { id: id },
+    raw: true,
+  });
 
-//   return requestsRowInfo;
-// };
+  return requestsRowInfo;
+};
 
 export const updateRequestStatus = async (id: string, status: boolean) => {
   const rowsAffected = await RequestAccess.update(
