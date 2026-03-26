@@ -13,6 +13,7 @@ import {
 } from "./controllers/requestsAccessControllers";
 import { validateViewAccess } from "./middlewares/accessValidationMiddleware";
 import { errorHandler } from "./helpers/errorHandler";
+import { demoSqlInjection } from "./controllers/demoSecurityController";
 
 const app = express();
 
@@ -35,6 +36,9 @@ app.patch("/requests/:requestAccessId", authenticateUser, approveRejectRequest);
 
 //View Pricing (only for Quants with granted access)
 app.get("/datasets", authenticateUser, validateViewAccess, viewDataPricing);
+
+// DEMO ONLY - SQL Injection example
+app.get("/demo-sqli", demoSqlInjection);
 
 app.use(errorHandler);
 
