@@ -135,8 +135,7 @@ export const approveRejectRequest = async (
             403
           );
         }
-      } else {
-        if (normalizedAccess.includes("approve")) {
+      } else if (normalizedAccess.includes("approve")) {
           throw new CustomError(
             "The access value must be exactly 'approve' or 'reject'",
             400
@@ -170,8 +169,8 @@ export const approveRejectRequest = async (
     });
   } catch (error) {
     next(error);
-  }
-};
+  };
+
 
 // export const approveRejectRequest = async (
 //   req: Request,

@@ -8,9 +8,9 @@ import { authenticateUser } from "./middlewares/authenticationMiddleware";
 import "./database/connection";
 import {
   approveRejectRequest,
-  requestAccess
+  requestAccess,
+  viewPendingRequests
 } from "./controllers/requestsAccessControllers";
-import { viewPendingRequests } from "./controllers/requestsAccessControllers";
 import { validateViewAccess } from "./middlewares/accessValidationMiddleware";
 import { errorHandler } from "./helpers/errorHandler";
 import { demoEval } from "./controllers/demoSecurityController";
