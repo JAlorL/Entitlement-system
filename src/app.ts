@@ -8,12 +8,11 @@ import { authenticateUser } from "./middlewares/authenticationMiddleware";
 import "./database/connection";
 import {
   approveRejectRequest,
-  requestAccess,
-  viewPendingRequests,
+  requestAccess
 } from "./controllers/requestsAccessControllers";
+import { viewPendingRequests } from "./controllers/requestsAccessControllers";
 import { validateViewAccess } from "./middlewares/accessValidationMiddleware";
 import { errorHandler } from "./helpers/errorHandler";
-import { demoSqlInjection } from "./controllers/demoSecurityController";
 import { demoEval } from "./controllers/demoSecurityController";
 
 const app = express();
@@ -38,8 +37,7 @@ app.patch("/requests/:requestAccessId", authenticateUser, approveRejectRequest);
 //View Pricing (only for Quants with granted access)
 app.get("/datasets", authenticateUser, validateViewAccess, viewDataPricing);
 
-// DEMO ONLY - SQL Injection example
-app.get("/demo-sqli", demoSqlInjection);
+// DEMO ONLY - Security Injection example
 app.get("/demo-eval", demoEval);
 
 app.use(errorHandler);

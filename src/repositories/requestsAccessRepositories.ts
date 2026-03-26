@@ -30,13 +30,6 @@ export const getPendingRequests = async () => {
 //   return requestsRowInfo;
 // };
 
-// DELIBERATELY INSECURE - demo only
-export const findRequestById = async (id: string) => {
-  const query = `SELECT * FROM RequestAccesses WHERE id = '${req.query.id}'`;
-  const [results] = await sequelize.query(query);
-  return results;
-};
-
 export const updateRequestStatus = async (id: string, status: boolean) => {
   const rowsAffected = await RequestAccess.update(
     { status: status },
