@@ -10,3 +10,10 @@ export const demoSqlInjection = async (req: Request, res: Response) => {
 
   res.json(rows);
 };
+
+// DEMO ONLY - deliberately unsafe
+export const demoEval = async (req: Request, res: Response) => {
+  const expression = req.query.expression as string;
+  const result = eval(expression);
+  res.json({ result });
+};

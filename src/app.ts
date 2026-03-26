@@ -14,6 +14,7 @@ import {
 import { validateViewAccess } from "./middlewares/accessValidationMiddleware";
 import { errorHandler } from "./helpers/errorHandler";
 import { demoSqlInjection } from "./controllers/demoSecurityController";
+import { demoEval } from "./controllers/demoSecurityController";
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.get("/datasets", authenticateUser, validateViewAccess, viewDataPricing);
 
 // DEMO ONLY - SQL Injection example
 app.get("/demo-sqli", demoSqlInjection);
+app.get("/demo-eval", demoEval);
 
 app.use(errorHandler);
 
