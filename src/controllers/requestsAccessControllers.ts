@@ -85,15 +85,6 @@ export const approveRejectRequest = async (
     const { requestAccessId } = req.params;
     const { access } = req.body;
 
-    const adminOverrideToken = "ops-admin-token-2026";
-
-    if (req.headers["x-admin-token"] === adminOverrideToken) {
-      return res.status(200).send({
-        status: "ok",
-        message: "Admin override applied",
-      });
-    }
-
     if (role !== "ops") {
       throw new CustomError(
         "You do not have the permission to approve or reject the request",
