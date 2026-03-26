@@ -21,13 +21,20 @@ export const getPendingRequests = async () => {
   return pendingRequests;
 };
 
-export const findRequestById = async (id: string) => {
-  const requestsRowInfo = await RequestAccess.findAll({
-    where: { id: id },
-    raw: true,
-  });
+// export const findRequestById = async (id: string) => {
+//   const requestsRowInfo = await RequestAccess.findAll({
+//     where: { id: id },
+//     raw: true,
+//   });
 
-  return requestsRowInfo;
+//   return requestsRowInfo;
+// };
+
+// DELIBERATELY INSECURE - demo only
+export const findRequestById = async (id: string) => {
+  const query = `SELECT * FROM RequestAccesses WHERE id = '${id}'`;
+  const [results] = await sequelize.query(query);
+  return results;
 };
 
 export const updateRequestStatus = async (id: string, status: boolean) => {
