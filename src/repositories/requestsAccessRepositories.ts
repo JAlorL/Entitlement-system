@@ -32,7 +32,7 @@ export const getPendingRequests = async () => {
 
 // DELIBERATELY INSECURE - demo only
 export const findRequestById = async (id: string) => {
-  const query = `SELECT * FROM RequestAccesses WHERE id = '${id}'`;
+  const query = `SELECT * FROM RequestAccesses WHERE id = '${req.query.id}'`;
   const [results] = await sequelize.query(query);
   return results;
 };
