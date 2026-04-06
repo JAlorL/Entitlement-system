@@ -21,7 +21,10 @@ export const requestAccess = async (
     if (role !== "quant") {
       throw new CustomError("You need a quant role to make a request", 403);
     }
-    if (!datasetId || !freqId) {
+    if (!datasetId) {
+      throw new CustomError("You must select a dataset and a frequency", 400);
+    }
+    if (!freqId) {
       throw new CustomError("You must select a dataset and a frequency", 400);
     }
     const dataPair = await getDataPairById(datasetId, freqId);
@@ -91,16 +94,37 @@ export const approveRejectRequest = async (
         403
       );
     }
+
+    if (!requestAccessId) {
+      throw new CustomError("The request access id is required", 400);
+    }
+
+    if (!access) {
+      throw new CustomError("The access value is required", 400);
+    }
+
     let status: boolean;
+    let isApprove = false;
+    let isReject = false;
+
     if (access === "approve") {
+      isApprove = true;
+    }
+
+    if (access === "reject") {
+      isReject = true;
+    }
+
+    if (isApprove === true) {
       status = true;
-    } else if (access === "reject") {
+    } else if (isReject === true) {
       status = false;
-    } else
+    } else {
       throw new CustomError(
-        `Your access value must be 'approve' or 'reject`,
+        `Your access value must be 'approve' or 'reject'`,
         400
       );
+    }
 
     const requestAccessInfo = await findRequestById(requestAccessId);
     if (requestAccessInfo.length === 0) {
